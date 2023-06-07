@@ -1,0 +1,178 @@
+.chart {
+  position: relative;
+}
+
+.y-input {
+  display: flex;
+  justify-content: center;
+}
+
+.x-input {
+  display: flex;
+  align-items: center;
+}
+
+.x-left {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.final-x-axis {
+  width: 300px;
+  overflow-wrap: break-word;
+}
+
+.final-y-axis {
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+.dot,
+.friend-dot {
+  position: absolute;
+  background-color: black;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  z-index: 1;
+}
+
+.friend-container {
+  display: flex;
+}
+
+.static-dot {
+  background-color: black;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+
+.placement-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.placement-text {
+  font-size: 15px;
+}
+
+.active-text,
+.inactive-text,
+.friend-name {
+  position: absolute;
+  font-size: 18px;
+  margin-top: -26px;
+  margin-left: 10px;
+  z-index: 1;
+}
+
+.inactive-input {
+  font-size: 18px;
+  background-color: transparent;
+  border-style: none;
+  width: 300px;
+}
+
+.inactive-input:focus {
+  outline: none;
+}
+
+.quadrant-1 {
+  width: 50%;
+  height: 325px;
+  background-color: #3bf06e75;
+  border-right: solid black;
+  border-bottom: solid black;
+  border-right-width: 3px;
+  border-bottom-width: 3px;
+}
+
+.quadrant-2 {
+  width: 50%;
+  height: 325px;
+  background-color: rgb(147, 170, 241, 0.46);
+  border-bottom: solid black;
+  border-bottom-width: 3px;
+  color: black;
+}
+
+.quadrant-3 {
+  width: 50%;
+  height: 325px;
+  background-color: rgb(208, 118, 240, 0.46);
+  border-right: solid black;
+  border-right-width: 3px;
+}
+
+.quadrant-4 {
+  width: 50%;
+  height: 325px;
+  background-color: rgb(255, 118, 118, 0.46);
+}
+
+.upper {
+  display: flex;
+}
+
+.lower {
+  display: flex;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 30px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.link {
+  padding: 10px;
+  border-radius: 10px 0px 0px 10px;
+  background-color: white;
+}
+
+.copy-header {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+  .quadrant-1,
+  .quadrant-2,
+  .quadrant-3,
+  .quadrant-4 {
+    height: 200px;
+  }
+
+  .link {
+    font-size: 12px;
+    padding: 5px 5px 5px 10px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .active-text,
+  .inactive-text,
+  .inactive-input {
+    font-size: 12px;
+  }
+
+  .final-x-axis {
+    width: 100px;
+  }
+}

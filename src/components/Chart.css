@@ -1,0 +1,207 @@
+/* .h-line {
+  width: 650px;
+  background: black;
+  height: 4px;
+  z-index: 1;
+  top: 300px;
+}
+
+.point-left {
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-right: 20px solid black;
+}
+
+.point-right {
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-left: 20px solid black;
+}
+
+.h-axis {
+}
+
+.v-line {
+  width: 4px;
+  background: black;
+  height: 650px;
+  z-index: 1;
+}
+
+.point-top {
+  position: absolute;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-right: 20px solid black;
+  transform: rotate(90deg);
+  margin-left: -7.5px;
+  margin-top: -24px;
+  z-index: 1;
+}
+
+.point-bottom {
+  position: absolute;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-right: 20px solid black;
+  transform: rotate(270deg);
+  margin-left: -7.5px;
+  margin-top: -4px;
+  z-index: 1;
+}
+
+.axes {
+}
+
+.chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot {
+  position: absolute;
+  background-color: black;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  margin-top: -10px;
+  margin-left: -10px;
+  z-index: 1;
+}
+
+.quadrant-1 {
+  position: absolute;
+  width: 323px;
+  height: 309px;
+  background-color: rgb(59, 240, 110, 0.46);
+  margin-left: 327px;
+  margin-top: -313px;
+}
+
+.quadrant-2 {
+  position: absolute;
+  width: 323px;
+  height: 309px;
+  background-color: rgb(147, 170, 241, 0.46);
+  margin-left: -327px;
+  margin-top: -313px;
+}
+
+.quadrant-3 {
+  position: absolute;
+  width: 323px;
+  height: 309px;
+  background-color: rgb(208, 118, 240, 0.46);
+  margin-left: -327px;
+  margin-top: 313px;
+}
+
+.quadrant-4 {
+  position: absolute;
+  width: 323px;
+  height: 309px;
+  background-color: rgb(255, 118, 118, 0.46);
+  margin-left: 327px;
+  margin-top: 313px;
+}
+
+.paint {
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.paint:hover {
+  transform: scale(1.2);
+  cursor: grab;
+}
+
+.y-top {
+  position: absolute;
+  height: 30px;
+  margin-top: -370px;
+  margin-left: -95px;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  text-align: center;
+  font-size: 18px;
+  background-color: transparent;
+}
+
+.y-bottom {
+  height: 30px;
+  position: absolute;
+  margin-top: 340px;
+  margin-left: -95px;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  text-align: center;
+  font-size: 18px;
+  background-color: transparent;
+}
+
+.x-left {
+  height: 30px;
+  position: absolute;
+  margin-left: 350px;
+  margin-top: -18px;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  text-align: center;
+  font-size: 18px;
+  background-color: transparent;
+}
+
+.x-right {
+  height: 30px;
+  position: absolute;
+  margin-left: -548px;
+  margin-top: -18px;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  text-align: center;
+  font-size: 18px;
+  background-color: transparent;
+}
+
+.submit-btn {
+  position: absolute;
+  margin-left: 370px;
+  margin-top: 253px;
+  border-style: none;
+  border-radius: 10px;
+  background-color: #6372fb;
+  color: white;
+  padding: 15px 50px 15px 50px;
+  font-size: 25px;
+}
+
+.submit-btn:hover {
+  transform: scale(1.05);
+  cursor: grab;
+}
+
+.active-text,
+.inactive-text {
+  font-size: 18px;
+  position: absolute;
+  margin-top: -17px;
+  margin-left: 10px;
+  z-index: 1;
+}
+
+.inactive-input {
+  font-size: 18px;
+  background-color: transparent;
+  border-style: none;
+  width: 300px;
+}
+
+.inactive-input:focus {
+  outline: none;
+  font-weight: bold;
+} */

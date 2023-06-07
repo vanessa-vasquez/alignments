@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import FormChart from "./components/FormChart.js";
+import Chart from "./components/Chart.js";
+import ResponsiveChart from "./components/ResponsiveChart.js";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      custom: {
+        main: "#6372fb",
+        contrastText: "#fff",
+      },
+    },
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ResponsiveChart />}></Route>
+          <Route path="/:id" element={<ValidateLink />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
+}
+
+function ValidateLink() {
+  let params = useParams();
+  let userId = params.id.match(/^\w{4}-\w{3}$/);
+  if (!userId) {
+    return <ResponsiveChart />;
+  }
+
+  return <Chart />;
 }
 
 export default App;
