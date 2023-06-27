@@ -1,7 +1,6 @@
 import "./App.css";
-import FormChart from "./components/FormChart.js";
 import Chart from "./components/Chart.js";
-import ResponsiveChart from "./components/ResponsiveChart.js";
+import FormChart from "./components/FormChart.js";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -18,7 +17,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ResponsiveChart />}></Route>
+          <Route path="/" element={<FormChart />}></Route>
           <Route path="/:id" element={<ValidateLink />}></Route>
         </Routes>
       </BrowserRouter>
@@ -30,7 +29,7 @@ function ValidateLink() {
   let params = useParams();
   let userId = params.id.match(/^\w{4}-\w{3}$/);
   if (!userId) {
-    return <ResponsiveChart />;
+    return <FormChart />;
   }
 
   return <Chart />;

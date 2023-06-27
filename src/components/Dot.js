@@ -1,21 +1,32 @@
 import React, { useState } from "react";
-
+import { database } from "../firebase.js";
+import { ref, set } from "firebase/database";
 import { Box } from "@mui/material";
 
 export default function Dot({
   left,
   top,
   active,
+  gridRef,
   name,
   setName,
   disableEditing,
   setDisableEditing,
 }) {
+  const path = window.location.pathname.substring(1);
+
   const handleEnter = (e) => {
+    const [gridOffsetX, gridOffsetY] = [
+      gridRef.current.offsetLeft,
+      gridRef.current.offsetTop,
+    ];
     if (e.key === "Enter") {
       setDisableEditing(true);
       //submit
-
+      set(ref(database, `charts/${path}/users/${name}`), {
+        left: ((left - gridOffsetX) / gridRef.current.clientWidth) * 100,
+        top: ((top - gridOffsetY) / gridRef.current.clientHeight) * 100,
+      });
     }
   };
 
@@ -26,7 +37,7 @@ export default function Dot({
           className="dot"
           style={{
             left,
-            top
+            top,
           }}
         ></div>
         {active ? (
@@ -69,7 +80,7 @@ export default function Dot({
               className="dot"
               style={{
                 left,
-                top
+                top,
               }}
             ></div>
             <div

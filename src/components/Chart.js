@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Chart.css";
+import "./Main.css";
 import Dot from "./Dot";
 import Quadrant from "./Quadrant";
 import { Grid, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { database } from "../firebase.js";
-
 import { ref, child, get, set } from "firebase/database";
 import StaticDot from "./StaticDot";
 
+const SITE_NAME = "alignments.glitch.me";
 export default function Chart() {
   const [moveCursor, setMoveCursor] = useState(true);
   const [data, setData] = useState({});
@@ -19,7 +19,7 @@ export default function Chart() {
   const [disableEditing, setDisableEditing] = useState(false);
   const [name, setName] = useState("click me to enter your name");
 
-  const containerGrid = useRef(null)
+  const containerGrid = useRef(null);
 
   const path = window.location.pathname.substring(1);
   const dataLink = "alignments.glitch.me" + window.location.pathname;
@@ -52,27 +52,29 @@ export default function Chart() {
 
   const handleMouseMove = (e) => {
     if (moveCursor) {
-      const [gridOffsetX, gridOffsetY] = [containerGrid.current.parentElement.offsetLeft, containerGrid.current.parentElement.offsetTop]
+      const [gridOffsetX, gridOffsetY] = [
+        containerGrid.current.parentElement.offsetLeft,
+        containerGrid.current.parentElement.offsetTop,
+      ];
       setCursorX(e.clientX - gridOffsetX);
       setCursorY(e.clientY - gridOffsetY);
-
-      // setOffsetX(e.target.offsetLeft);
-      // setOffsetY(e.target.offsetTop);
-
-      // setEleWidth(e.target.offsetWidth);
-      // setEleHeight(e.target.offsetHeight);
     }
   };
 
   const handleClick = (e) => {
+    const [gridOffsetX, gridOffsetY] = [
+      containerGrid.current.offsetLeft,
+      containerGrid.current.offsetTop,
+    ];
     setMoveCursor(false);
-
     if (!moveCursor) {
       setDisableEditing(true);
       //submit
       set(ref(database, `charts/${path}/users/${name}`), {
-        left: (cursorX - e.target.offsetLeft) / containerGrid.current.clientWidth * 100,
-        top: (cursorY - e.target.offsetTop) / containerGrid.current.clientHeight * 100,
+        left:
+          ((cursorX - gridOffsetX) / containerGrid.current.clientWidth) * 100,
+        top:
+          ((cursorY - gridOffsetY) / containerGrid.current.clientHeight) * 100,
       });
     }
   };
@@ -82,14 +84,14 @@ export default function Chart() {
       <Grid item xs={12} md={12}>
         <Box display={{ xs: "block", sm: "block", md: "none" }}>
           <div className="header title">
-            <Link to="/">alignments.glitch.me</Link>
+            <Link to="/">{SITE_NAME}</Link>
           </div>
         </Box>
       </Grid>
       <Grid item xs={3} md={3}>
         <Box display={{ xs: "none", sm: "none", md: "block" }}>
           <div className="header title">
-            <Link to="/">alignments.glitch.me</Link>
+            <Link to="/">{SITE_NAME}</Link>
           </div>
         </Box>
       </Grid>
@@ -115,37 +117,33 @@ export default function Chart() {
       <Grid item xs={3} md={3} className="x-input x-left">
         <div className="final-x-axis">{data.left}</div>
       </Grid>
-      <Grid
-        item
-        xs={6}
-        md={6}
-        className="chart"
-        onMouseMove={handleMouseMove}
-        onClick={handleClick}
-      >
-
-
+      <Grid item xs={6} md={6} className="chart">
+        <Dot
+          left={cursorX}
+          top={cursorY}
+          active={moveCursor}
+          path={path}
+          name={name}
+          gridRef={containerGrid}
+          setName={setName}
+          disableEditing={disableEditing}
+          setDisableEditing={setDisableEditing}
+        />
         <div className="final-y-axis">{data.top}</div>
-        <div ref={containerGrid}>
-          <Dot
-            left={cursorX}
-            top={cursorY}
-            active={moveCursor}
-            path={path}
-            name={name}
-            setName={setName}
-            disableEditing={false}
-            setDisableEditing={setDisableEditing}
-          />
-                  {Object.keys(friends).map((key) => {
-          return (
-            <StaticDot
-              left={friends[key]["left"]}
-              top={friends[key]["top"]}
-              name={key}
-            />
-          );
-        })}
+        <div
+          ref={containerGrid}
+          onMouseMove={handleMouseMove}
+          onClick={handleClick}
+        >
+          {Object.keys(friends).map((key) => {
+            return (
+              <StaticDot
+                left={friends[key]["left"]}
+                top={friends[key]["top"]}
+                name={key}
+              />
+            );
+          })}
           <div className="upper">
             <Quadrant position={1} />
             <Quadrant position={2} />

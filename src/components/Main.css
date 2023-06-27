@@ -20,11 +20,13 @@
 .final-x-axis {
   width: 300px;
   overflow-wrap: break-word;
+  font-size: 18px;
 }
 
 .final-y-axis {
   text-align: center;
   overflow-wrap: break-word;
+  font-size: 18px;
 }
 
 .dot,
@@ -35,6 +37,7 @@
   width: 12px;
   height: 12px;
   z-index: 1;
+  margin-top: -3px;
 }
 
 .friend-container {
@@ -65,8 +68,8 @@
 .friend-name {
   position: absolute;
   font-size: 18px;
-  margin-top: -26px;
-  margin-left: 10px;
+  margin-top: -10px;
+  margin-left: 20px;
   z-index: 1;
 }
 
@@ -148,7 +151,7 @@ a {
   justify-content: center;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   .quadrant-1,
   .quadrant-2,
   .quadrant-3,
@@ -156,23 +159,39 @@ a {
     height: 200px;
   }
 
-  .link {
-    font-size: 12px;
-    padding: 5px 5px 5px 10px;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
+  .placement-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .active-text,
   .inactive-text,
+  .friend-name {
+    font-size: 15px;
+  }
+
   .inactive-input {
-    font-size: 12px;
+    font-size: 15px;
+  }
+
+  .dot,
+  .friend-dot {
+    width: 10px;
+    height: 10px;
+    margin-top: -5px;
   }
 
   .final-x-axis {
     width: 100px;
+    font-size: 15px;
+  }
+
+  .final-y-axis {
+    font-size: 15px;
+  }
+
+  .link {
+    font-size: 12px;
+    padding: 5px 5px 5px 10px;
   }
 }
