@@ -17,7 +17,7 @@ export default function Chart() {
   const [cursorY, setCursorY] = useState(0);
   const [copied, setCopied] = useState(false);
   const [disableEditing, setDisableEditing] = useState(false);
-  const [name, setName] = useState("click me to enter your name");
+  const [name, setName] = useState("");
 
   const containerGrid = useRef(null);
 

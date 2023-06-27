@@ -63,6 +63,7 @@ export default function Dot({
               onKeyDown={handleEnter}
               className="inactive-input"
               type="text"
+              placeholder="tap me to enter your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -94,6 +95,7 @@ export default function Dot({
                 readOnly={disableEditing}
                 onKeyDown={handleEnter}
                 className="inactive-input"
+                placeholder="tap me to enter your name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
