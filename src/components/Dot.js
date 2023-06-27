@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { Box } from "@mui/material";
 
 export default function Dot({
@@ -14,6 +15,7 @@ export default function Dot({
     if (e.key === "Enter") {
       setDisableEditing(true);
       //submit
+
     }
   };
 
@@ -23,16 +25,16 @@ export default function Dot({
         <div
           className="dot"
           style={{
-            left: `${(left / window.innerWidth) * 100}%`,
-            top: `${(top / window.innerHeight) * 100}%`,
+            left,
+            top
           }}
         ></div>
         {active ? (
           <div
             className="active-text"
             style={{
-              left: `${(left / window.innerWidth) * 100}%`,
-              top: `${(top / window.innerHeight) * 100}%`,
+              left,
+              top,
             }}
           >
             place yourself on the chart
@@ -41,8 +43,8 @@ export default function Dot({
           <div
             className="inactive-text"
             style={{
-              left: `${(left / window.innerWidth) * 100}%`,
-              top: `${(top / window.innerHeight) * 100}%`,
+              left: left,
+              top: top,
             }}
           >
             <input
@@ -66,15 +68,15 @@ export default function Dot({
             <div
               className="dot"
               style={{
-                left: `${(left / window.innerWidth) * 100}%`,
-                top: `${(top / window.innerHeight) * 100}%`,
+                left,
+                top
               }}
             ></div>
             <div
               className="inactive-text"
               style={{
-                left: `${(left / window.innerWidth) * 100}%`,
-                top: `${(top / window.innerHeight) * 100}%`,
+                left,
+                top,
               }}
             >
               <input

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Chart.css";
 import Dot from "./Dot";
 import Quadrant from "./Quadrant";
@@ -18,10 +18,8 @@ export default function Chart() {
   const [copied, setCopied] = useState(false);
   const [disableEditing, setDisableEditing] = useState(false);
   const [name, setName] = useState("click me to enter your name");
-  const [offsetX, setOffsetX] = useState(0);
-  const [offsetY, setOffsetY] = useState(0);
-  const [eleWidth, setEleWidth] = useState(0);
-  const [eleHeight, setEleHeight] = useState(0);
+
+  const containerGrid = useRef(null)
 
   const path = window.location.pathname.substring(1);
   const dataLink = "alignments.glitch.me" + window.location.pathname;
@@ -54,25 +52,27 @@ export default function Chart() {
 
   const handleMouseMove = (e) => {
     if (moveCursor) {
-      setCursorX(e.clientX - 324);
-      setCursorY(e.clientY - 325);
+      const [gridOffsetX, gridOffsetY] = [containerGrid.current.parentElement.offsetLeft, containerGrid.current.parentElement.offsetTop]
+      setCursorX(e.clientX - gridOffsetX);
+      setCursorY(e.clientY - gridOffsetY);
 
-      setOffsetX(e.target.offsetLeft);
-      setOffsetY(e.target.offsetTop);
+      // setOffsetX(e.target.offsetLeft);
+      // setOffsetY(e.target.offsetTop);
 
-      setEleWidth(e.target.offsetWidth);
-      setEleHeight(e.target.offsetHeight);
+      // setEleWidth(e.target.offsetWidth);
+      // setEleHeight(e.target.offsetHeight);
     }
   };
 
   const handleClick = (e) => {
     setMoveCursor(false);
+
     if (!moveCursor) {
       setDisableEditing(true);
       //submit
       set(ref(database, `charts/${path}/users/${name}`), {
-        left: (cursorX / window.innerWidth) * 100,
-        top: (cursorY / window.innerHeight) * 100,
+        left: (cursorX - e.target.offsetLeft) / containerGrid.current.clientWidth * 100,
+        top: (cursorY - e.target.offsetTop) / containerGrid.current.clientHeight * 100,
       });
     }
   };
@@ -123,17 +123,21 @@ export default function Chart() {
         onMouseMove={handleMouseMove}
         onClick={handleClick}
       >
-        <Dot
-          left={cursorX}
-          top={cursorY}
-          active={moveCursor}
-          path={path}
-          name={name}
-          setName={setName}
-          disableEditing={disableEditing}
-          setDisableEditing={setDisableEditing}
-        />
-        {Object.keys(friends).map((key) => {
+
+
+        <div className="final-y-axis">{data.top}</div>
+        <div ref={containerGrid}>
+          <Dot
+            left={cursorX}
+            top={cursorY}
+            active={moveCursor}
+            path={path}
+            name={name}
+            setName={setName}
+            disableEditing={false}
+            setDisableEditing={setDisableEditing}
+          />
+                  {Object.keys(friends).map((key) => {
           return (
             <StaticDot
               left={friends[key]["left"]}
@@ -142,15 +146,16 @@ export default function Chart() {
             />
           );
         })}
-        <div className="final-y-axis">{data.top}</div>
-        <div className="upper">
-          <Quadrant position={1} />
-          <Quadrant position={2} />
+          <div className="upper">
+            <Quadrant position={1} />
+            <Quadrant position={2} />
+          </div>
+          <div className="lower">
+            <Quadrant position={3} />
+            <Quadrant position={4} />
+          </div>
         </div>
-        <div className="lower">
-          <Quadrant position={3} />
-          <Quadrant position={4} />
-        </div>
+
         <div className="final-y-axis">{data.bottom}</div>
       </Grid>
       <Grid item xs={3} md={3} className="x-input x-right">

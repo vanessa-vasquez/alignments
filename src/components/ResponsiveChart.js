@@ -6,6 +6,7 @@ import { Grid, TextField, Button, Box } from "@mui/material";
 import { database } from "../firebase.js";
 import { ref, set } from "firebase/database";
 
+const LINK_LENGTH = 7;
 export default function ResponsiveChart() {
   const [top, setTop] = useState("");
   const [bottom, setBottom] = useState("");
@@ -81,7 +82,7 @@ export default function ResponsiveChart() {
     let link = "/";
     const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < LINK_LENGTH; i++) {
       if (i === 4) {
         link += "-";
       }
@@ -90,7 +91,6 @@ export default function ResponsiveChart() {
 
       link += randomCharacter;
     }
-
     return link;
   };
   return (
