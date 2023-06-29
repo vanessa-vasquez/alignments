@@ -172,6 +172,7 @@ a {
 
   .inactive-input {
     font-size: 15px;
+    margin-top: -5px;
   }
 
   .dot,
