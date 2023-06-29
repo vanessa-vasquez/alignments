@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { database } from "../firebase.js";
 import { ref, set } from "firebase/database";
 import { Box } from "@mui/material";
@@ -10,6 +10,8 @@ export default function Dot({
   gridRef,
   name,
   setName,
+  error,
+  setError,
   disableEditing,
   setDisableEditing,
 }) {
@@ -20,13 +22,15 @@ export default function Dot({
       gridRef.current.offsetLeft,
       gridRef.current.offsetTop,
     ];
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && name.trim() !== "") {
       setDisableEditing(true);
       //submit
       set(ref(database, `charts/${path}/users/${name}`), {
         left: ((left - gridOffsetX) / gridRef.current.clientWidth) * 100,
         top: ((top - gridOffsetY) / gridRef.current.clientHeight) * 100,
       });
+    } else if (e.key === "Enter" && name.trim() === "") {
+      setError(true);
     }
   };
 
@@ -63,7 +67,11 @@ export default function Dot({
               onKeyDown={handleEnter}
               className="inactive-input"
               type="text"
-              placeholder="tap me to enter your name"
+              placeholder={
+                error
+                  ? "please enter a valid name"
+                  : "tap me to enter your name"
+              }
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -95,7 +103,11 @@ export default function Dot({
                 readOnly={disableEditing}
                 onKeyDown={handleEnter}
                 className="inactive-input"
-                placeholder="tap me to enter your name"
+                placeholder={
+                  error
+                    ? "please enter a valid name"
+                    : "tap me to enter your name"
+                }
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}

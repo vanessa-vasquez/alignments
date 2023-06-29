@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Main.css";
+import "../styles/Main.css";
 import Dot from "./Dot";
 import Quadrant from "./Quadrant";
 import { Grid, Button, Box } from "@mui/material";
@@ -15,6 +15,7 @@ export default function Chart() {
   const [friends, setFriends] = useState({});
   const [cursorX, setCursorX] = useState(0);
   const [cursorY, setCursorY] = useState(0);
+  const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
   const [disableEditing, setDisableEditing] = useState(false);
   const [name, setName] = useState("");
@@ -22,7 +23,7 @@ export default function Chart() {
   const containerGrid = useRef(null);
 
   const path = window.location.pathname.substring(1);
-  const dataLink = "alignments.glitch.me" + window.location.pathname;
+  const dataLink = SITE_NAME + window.location.pathname;
 
   useEffect(() => {
     get(child(ref(database), `charts/${path}`))
@@ -68,14 +69,19 @@ export default function Chart() {
     ];
     setMoveCursor(false);
     if (!moveCursor) {
-      setDisableEditing(true);
-      //submit
-      set(ref(database, `charts/${path}/users/${name}`), {
-        left:
-          ((cursorX - gridOffsetX) / containerGrid.current.clientWidth) * 100,
-        top:
-          ((cursorY - gridOffsetY) / containerGrid.current.clientHeight) * 100,
-      });
+      if (name.trim() !== "") {
+        setDisableEditing(true);
+        //submit
+        set(ref(database, `charts/${path}/users/${name}`), {
+          left:
+            ((cursorX - gridOffsetX) / containerGrid.current.clientWidth) * 100,
+          top:
+            ((cursorY - gridOffsetY) / containerGrid.current.clientHeight) *
+            100,
+        });
+      } else {
+        setError(true);
+      }
     }
   };
 
@@ -122,6 +128,8 @@ export default function Chart() {
           left={cursorX}
           top={cursorY}
           active={moveCursor}
+          error={error}
+          setError={setError}
           path={path}
           name={name}
           gridRef={containerGrid}

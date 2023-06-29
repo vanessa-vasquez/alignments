@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Grid, TextField, Button, Box } from "@mui/material";
 import { database } from "../firebase.js";
 import { ref, set } from "firebase/database";
-import "./Main.css";
+import "../styles/Main.css";
 
 const LINK_LENGTH = 7;
 const SITE_NAME = "alignments.glitch.me";

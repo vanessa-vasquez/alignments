@@ -13,6 +13,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.3",
+    "copy-to-clipboard": "^3.3.3",
     "firebase": "^9.22.1",
     "jquery": "^3.7.0",
     "react": "^18.2.0",
